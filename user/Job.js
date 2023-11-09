@@ -25,7 +25,7 @@ const Job = sequelize
       position: {
         type: DataTypes.STRING,
         allowNull: false
-      },
+      }
     });
 
 module.exports = Job;

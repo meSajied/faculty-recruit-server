@@ -17,6 +17,11 @@ const Application = sequelize
         type: DataTypes.STRING,
         allowNull: false
       },
+
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false
+      }
     });
 
 module.exports = Application;
