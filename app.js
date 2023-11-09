@@ -4,8 +4,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 const logger = require("./logger");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const database = require("./database");
+database.authenticate();
+require("./user/UserAssociation");
+
+var usersRouter = require('./routes/userRouter');
+const {Sequelize} = require("sequelize");
 
 var app = express();
 
@@ -17,9 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -37,6 +39,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-logger.error("what a server");
+database.sync();
 
 module.exports = app;
