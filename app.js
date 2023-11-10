@@ -1,16 +1,16 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
 const database = require("./database");
 database.authenticate();
 require("./schemas/UserAssociation");
 
-var usersRouter = require('./routes/user-router/userRouter');
+const usersRouter = require('./routes/user-router/userRouter');
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
