@@ -1,10 +1,8 @@
 const {DataTypes} = require('sequelize');
 
-const Applicant = require("./Applicant");
-const Job = require("./Job");
 const sequelize = require("../database");
 
-const Application = sequelize
+const ApplicationSchema = sequelize
     .define("Application", {
       id: {
         type: DataTypes.UUID,
@@ -24,4 +22,4 @@ const Application = sequelize
       }
     });
 
-module.exports = Application;
+module.exports = ApplicationSchema;

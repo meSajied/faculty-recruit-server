@@ -2,14 +2,13 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-const logger = require("./logger");
+var bodyParser = require('body-parser');
 
 const database = require("./database");
 database.authenticate();
-require("./user/UserAssociation");
+require("./schemas/UserAssociation");
 
-var usersRouter = require('./routes/userRouter');
-const {Sequelize} = require("sequelize");
+var usersRouter = require('./routes/user-router/userRouter');
 
 var app = express();
 
@@ -20,6 +19,7 @@ app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/user', usersRouter);
 
@@ -38,7 +38,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-database.sync();
 
 module.exports = app;

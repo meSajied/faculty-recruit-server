@@ -1,0 +1,22 @@
+### hello
+
+POST http://localhost:47115/user/applicant
+Content-Type: application/json
+
+{
+  "id": "fe5e6c19-e332-4a0e-8d1c-069372cd67fc",
+  "firstName": "hello",
+  "lastName": "hi",
+  "email": "wh@ate.com",
+  "password": "qwertyui"
+}
+
+###
+
+GET http://localhost:47115/user/applicant
+Content-Type: application/json
+
+{
+  "email": "hello@qzw.com",
+  "password": "qawer"
+}

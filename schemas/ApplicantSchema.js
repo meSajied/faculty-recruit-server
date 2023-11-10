@@ -2,8 +2,8 @@ const {DataTypes} = require('sequelize');
 
 const sequelize = require("../database");
 
-const Reviewer = sequelize
-    .define("Reviewer", {
+const ApplicantSchema = sequelize
+    .define("Applicant", {
       id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -29,15 +29,10 @@ const Reviewer = sequelize
         unique: true
       },
 
-      position: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-
       password: {
         type: DataTypes.STRING,
         allowNull: false
       }
     });
 
-module.exports = Reviewer;
+module.exports = ApplicantSchema;

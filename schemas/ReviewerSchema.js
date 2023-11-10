@@ -2,8 +2,8 @@ const {DataTypes} = require('sequelize');
 
 const sequelize = require("../database");
 
-const Admin = sequelize
-    .define("Admin", {
+const ReviewerSchema = sequelize
+    .define("Reviewer", {
       id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -29,10 +29,15 @@ const Admin = sequelize
         unique: true
       },
 
+      position: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+
       password: {
         type: DataTypes.STRING,
         allowNull: false
       }
     });
 
-module.exports = Admin;
+module.exports = ReviewerSchema;

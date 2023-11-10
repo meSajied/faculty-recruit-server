@@ -1,10 +1,9 @@
 const {DataTypes} = require('sequelize');
 
-const Application = require("./Application");
 const sequelize = require("../database");
 
-const Job = sequelize
-    .define("Job", {
+const AdminSchema = sequelize
+    .define("Admin", {
       id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -12,20 +11,28 @@ const Job = sequelize
         primaryKey: true
       },
 
-      title: {
+      firstName: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        field: "first_name"
       },
 
-      department: {
+      lastName: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        field: "last_name"
       },
 
-      position: {
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+      },
+
+      password: {
         type: DataTypes.STRING,
         allowNull: false
       }
     });
 
-module.exports = Job;
+module.exports = AdminSchema;
