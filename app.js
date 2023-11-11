@@ -4,11 +4,15 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
-const database = require("./database");
-database.authenticate();
+require("./database").authenticate();
 require("./schemas/UserAssociation");
 
-const usersRouter = require('./routes/user-router/userRouter');
+const adminAccountRouter =
+    require('./routes/account-router/adminAccountRouter');
+const applicantAccountRouter =
+    require('./routes/account-router/applicantAccountRouter');
+const reviewerAccountRouter =
+    require('./routes/account-router/reviewerAccountRouter');
 
 const app = express();
 
@@ -21,7 +25,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/user', usersRouter);
+
+app.use('/account', adminAccountRouter);
+app.use('/account', applicantAccountRouter);
+app.use('/account', reviewerAccountRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

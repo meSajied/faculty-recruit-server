@@ -1,46 +1,25 @@
-const uuid = require("uuid");
-
 const ApplicantSchema = require("../schemas/ApplicantSchema");
-const logger = require("../logger");
+const {Account} = require("./Account");
 
 function ApplicantAccount(req, res) {
-  this.verifyLogin = async function() {
-    try {
-      let user = await tryVerifyLogin();
-      res.json(user);
-      logger.info("User verified");
-    }catch(err) {
-      logger.error(err.parent.sqlMessage);
-      res.json(err.parent.sqlMessage);
-    }
+  this.verifyToken = async function() {
+    await new Account(req, res, ApplicantSchema).verifyToken();
   }
 
-  async function tryVerifyLogin() {
-    return await ApplicantSchema.findOne({
-      where: {
-        email: req.body.email,
-        password: req.body.password
-      }
-    }).then((response) => {
-      if(response == null) {
-        return("No user found");
-      }
-    })
+  this.verifyLogin = async function() {
+    await new Account(req, res, ApplicantSchema).verifyLogin();
   }
 
   this.createNewAccount = async function() {
-    try {
-      let account = await tryCreateNewAccount();
-      logger.info("New applicant account created");
-      res.json(account);
-    } catch (err) {
-      logger.error(err.parent.sqlMessage);
-      res.json(err.parent.sqlMessage);
-    }
+    await new Account(req, res, ApplicantSchema).createNewAccount();
   }
 
-  async function tryCreateNewAccount() {
-    return await ApplicantSchema.create(req.body);
+  this.logout = async function() {
+    await new Account(req, res, ApplicantSchema).logout();
+  }
+
+  this.changePassword = async function() {
+    await new Account(req, res).changePassword();
   }
 }
 
