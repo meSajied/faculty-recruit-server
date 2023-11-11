@@ -5,30 +5,25 @@ const {ApplicantAccount} =
     require("../../account/ApplicantAccount");
 
 /* Routers for applicant */
-router.all("/applicant")
+router
     .get("/verify", (req, res, next) => {
-      new ApplicantAccount(req, res, next).verifyToken();
-      next();
+      new ApplicantAccount(req, res).verifyToken();
     })
 
     .get("/login", (req, res, next) => {
-      new ApplicantAccount(req, res, next).verifyLogin();
-      next();
+      new ApplicantAccount(req, res).verifyLogin();
     })
 
     .post("/signup", (req, res, next) => {
-      new ApplicantAccount(req, res, next).createNewAccount();
-      next();
+      new ApplicantAccount(req, res).createNewAccount();
     })
 
     .get("/logout", (req, res, next) => {
-      new ApplicantAccount(req, res, next).logout();
-      next();
+      new ApplicantAccount(req, res).logout();
     })
 
     .put("/changepass", (req, res, next) => {
-      new ApplicantAccount(req, res, next).changePassword();
-      next();
+      new ApplicantAccount(req, res).changePassword();
     })
 
 module.exports = router;

@@ -1,6 +1,6 @@
 const logger = require("../logger");
 
-function Account(req, res, next, schema) {
+function Account(req, res, schema) {
   this.verifyToken = async function() {
     next();
   }
@@ -10,11 +10,9 @@ function Account(req, res, next, schema) {
       let user = await tryVerifyLogin();
       res.json(user);
       logger.info("User verified");
-      return next();
     }catch(err) {
       logger.error(err);
       res.json("Could not verify login");
-      return next();
     }
   }
 
@@ -27,6 +25,8 @@ function Account(req, res, next, schema) {
     }).then((response) => {
       if(response == null) {
         return("No user found");
+      }else {
+        return response;
       }
     })
   }
@@ -36,11 +36,9 @@ function Account(req, res, next, schema) {
       await tryCreateNewAccount();
       logger.info("New applicant account created");
       res.json("account created");
-      return next();
     } catch (err) {
       logger.error(err);
-      res.json("Could not create account");
-      return next();
+      res.json(err.errors[0].message);
     }
   }
 
@@ -49,7 +47,7 @@ function Account(req, res, next, schema) {
   }
 
   this.logout = async function() {
-    next();
+    
   }
 
   this.changePassword = async function() {
@@ -58,10 +56,8 @@ function Account(req, res, next, schema) {
     if(user != null) {
       await tryChangePassword();
       res.json("Password updated");
-      return next();
     }else {
       res.json("Could not update password");
-      return next();
     }
   }
 
@@ -75,11 +71,9 @@ function Account(req, res, next, schema) {
         }
       }).save();
       res.json("Password changed");
-      return next();
     }catch (err) {
       logger.error(err);
       res.json("Could not change password");
-      return next();
     }
   }
 }

@@ -26,9 +26,11 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/account', adminAccountRouter);
-app.use('/account', applicantAccountRouter);
-app.use('/account', reviewerAccountRouter);
+app.use('/account/admin', adminAccountRouter);
+app.use('/account/applicant', applicantAccountRouter);
+app.use('/account/reviewer', reviewerAccountRouter);
+
+require("./schemas/UserAssociation");
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

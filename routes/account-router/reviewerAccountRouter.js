@@ -5,25 +5,21 @@ const {ReviewerAccount} =
     require("../../account/ReviewerAccount");
 
 /* Routers for applicant */
-router.all("/reviewer")
+router
     .get("/verify", (req, res, next) => {
-      new ReviewerAccount(req, res, next).verifyToken();
-      next();
+      new ReviewerAccount(req, res).verifyToken();
     })
 
     .get("/login", (req, res, next) => {
-      new ReviewerAccount(req, res, next).verifyLogin();
-      next();
+      new ReviewerAccount(req, res).verifyLogin();
     })
 
     .get("/logout", (req, res, next) => {
-      new ReviewerAccount(req, res, next).logout();
-      next();
+      new ReviewerAccount(req, res).logout();
     })
 
     .put("/change-pass", (req, res, next) => {
-      new ReviewerAccount(req, res, next).changePassword();
-      next();
+      new ReviewerAccount(req, res).changePassword();
     })
 
 module.exports = router;

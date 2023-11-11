@@ -5,20 +5,17 @@ const {AdminAccount} =
     require("../../account/AdminAccount");
 
 /* Routers for applicant */
-router.all("/admin")
+router
     .get("/login", (req, res, next) => {
-      new AdminAccount(req, res, next).verifyLogin();
-      next();
+      new AdminAccount(req, res).verifyLogin();
     })
 
     .get("/logout", (req, res, next) => {
-      new AdminAccount(req, res, next).logout();
-      next();
+      new AdminAccount(req, res).logout();
     })
 
     .put("/change-pass", (req, res, next) => {
-      new AdminAccount(req, res, next).changePassword();
-      next();
+      new AdminAccount(req, res).changePassword();
     })
 
 module.exports = router;
