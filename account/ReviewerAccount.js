@@ -1,21 +1,21 @@
 const ReviewerSchema = require("../schemas/ReviewerSchema");
 const {Account} = require("./Account");
 
-async function ReviewerAccount(req, res) {
+async function ReviewerAccount(req, res, next) {
   this.verifyToken = async function() {
-    await new Account(req, res, ReviewerSchema).verifyToken();
+    await new Account(req, res, next, ReviewerSchema).verifyToken();
   }
 
   this.verifyLogin = async function() {
-    await new Account(req, res, ReviewerSchema).verifyLogin();
+    await new Account(req, res, next, ReviewerSchema).verifyLogin();
   }
 
   this.logout = async function() {
-    await new Account(req, res, ReviewerSchema).logout();
+    await new Account(req, res, next, ReviewerSchema).logout();
   }
 
   this.changePassword = async function() {
-    await new Account(req, res, ReviewerAccount).changePassword();
+    await new Account(req, res, next, ReviewerAccount).changePassword();
   }
 }
 

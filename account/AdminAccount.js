@@ -1,17 +1,20 @@
 const AdminSchema = require("../schemas/AdminSchema");
 const {Account} = require("./Account");
 
-function AdminAccount(req, res) {
+function AdminAccount(req, res, next) {
   this.verifyLogin = async function() {
-    await new Account(req, res, AdminSchema).verifyLogin();
+    await new Account(req, res, next, AdminSchema).verifyLogin();
+    next();
   }
 
   this.logout = async function() {
-    await new Account(req, res, AdminSchema).logout();
+    await new Account(req, res, next, AdminSchema).logout();
+    next();
   }
 
   this.changePassword = async function() {
-    await new Account(req, res, AdminSchema).changePassword();
+    await new Account(req, res, next, AdminSchema).changePassword();
+    next();
   }
 }
 

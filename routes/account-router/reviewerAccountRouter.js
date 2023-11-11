@@ -7,19 +7,23 @@ const {ReviewerAccount} =
 /* Routers for applicant */
 router.all("/reviewer")
     .get("/verify", (req, res, next) => {
-      new ReviewerAccount(req, res).verifyToken();
+      new ReviewerAccount(req, res, next).verifyToken();
+      next();
     })
 
     .get("/login", (req, res, next) => {
-      new ReviewerAccount(req, res).verifyLogin();
+      new ReviewerAccount(req, res, next).verifyLogin();
+      next();
     })
 
     .get("/logout", (req, res, next) => {
-      new ReviewerAccount(req, res).logout();
+      new ReviewerAccount(req, res, next).logout();
+      next();
     })
 
     .put("/change-pass", (req, res, next) => {
-      new ReviewerAccount(req, res).changePassword();
+      new ReviewerAccount(req, res, next).changePassword();
+      next();
     })
 
 module.exports = router;

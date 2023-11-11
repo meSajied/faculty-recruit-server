@@ -7,23 +7,28 @@ const {ApplicantAccount} =
 /* Routers for applicant */
 router.all("/applicant")
     .get("/verify", (req, res, next) => {
-      new ApplicantAccount(req, res).verifyToken();
+      new ApplicantAccount(req, res, next).verifyToken();
+      next();
     })
 
     .get("/login", (req, res, next) => {
-      new ApplicantAccount(req, res).verifyLogin();
+      new ApplicantAccount(req, res, next).verifyLogin();
+      next();
     })
 
     .post("/signup", (req, res, next) => {
-      new ApplicantAccount(req, res).createNewAccount();
+      new ApplicantAccount(req, res, next).createNewAccount();
+      next();
     })
 
     .get("/logout", (req, res, next) => {
-      new ApplicantAccount(req, res).logout();
+      new ApplicantAccount(req, res, next).logout();
+      next();
     })
 
-    .put("/change-pass", (req, res, next) => {
-      new ApplicantAccount(req, res).changePassword();
+    .put("/changepass", (req, res, next) => {
+      new ApplicantAccount(req, res, next).changePassword();
+      next();
     })
 
 module.exports = router;
