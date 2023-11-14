@@ -21,6 +21,10 @@ function ApplicantAccount(req, res) {
   this.changePassword = async function() {
     await new Account(req, res, ApplicantSchema).changePassword();
   }
+
+  this.delete = async function() {
+    await new Account(req, res, ApplicantSchema).delete();
+  }
 }
 
 module.exports = {ApplicantAccount};

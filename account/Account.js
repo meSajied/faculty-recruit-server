@@ -2,7 +2,6 @@ const logger = require("../logger");
 
 function Account(req, res, schema) {
   this.verifyToken = async function() {
-    next();
   }
 
   this.verifyLogin = async function() {
@@ -10,7 +9,7 @@ function Account(req, res, schema) {
       let user = await tryVerifyLogin();
       res.json(user);
       logger.info("User verified");
-    }catch(err) {
+    }catch (err) {
       logger.error(err);
       res.json("Could not verify login");
     }
@@ -24,7 +23,7 @@ function Account(req, res, schema) {
       }
     }).then((response) => {
       if(response == null) {
-        return("No user found");
+        return ("No user found");
       }else {
         return response;
       }
@@ -32,33 +31,25 @@ function Account(req, res, schema) {
   }
 
   this.createNewAccount = async function() {
+    await tryCreateNewAccount();
+  }
+
+  async function tryCreateNewAccount() {
     try {
-      await tryCreateNewAccount();
-      logger.info("New applicant account created");
-      res.json("account created");
-    } catch (err) {
+      await schema.create(req.body);
+      res.json("Account created");
+    }catch (err) {
       logger.error(err);
       res.json(err.errors[0].message);
     }
   }
 
-  async function tryCreateNewAccount() {
-    return await schema.create(req.body);
-  }
-
   this.logout = async function() {
-    
+
   }
 
   this.changePassword = async function() {
-    let user = await schema.findByPk(req.body.id);
-
-    if(user != null) {
-      await tryChangePassword();
-      res.json("Password updated");
-    }else {
-      res.json("Could not update password");
-    }
+    await tryChangePassword();
   }
 
   async function tryChangePassword() {
@@ -69,11 +60,30 @@ function Account(req, res, schema) {
         where: {
           id: req.body.id
         }
-      }).save();
+      });
       res.json("Password changed");
     }catch (err) {
       logger.error(err);
       res.json("Could not change password");
+    }
+  }
+
+  this.delete = async function() {
+    await tryDelete();
+  }
+
+  async function tryDelete() {
+    try {
+      await schema.destroy({
+        where: {
+          id: req.body.id,
+          password: req.body.password
+        }
+      });
+      res.json("Account deleted");
+    }catch (err) {
+      logger.error(err);
+      res.json("Account could not be deleted");
     }
   }
 }

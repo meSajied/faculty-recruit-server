@@ -18,7 +18,7 @@ router
       new ReviewerAccount(req, res).logout();
     })
 
-    .put("/change-pass", (req, res, next) => {
+    .put("/changepass", (req, res, next) => {
       new ReviewerAccount(req, res).changePassword();
     })
 

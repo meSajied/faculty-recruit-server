@@ -26,4 +26,8 @@ router
       new ApplicantAccount(req, res).changePassword();
     })
 
+    .delete("/delete", (req, res, next) => {
+      new ApplicantAccount(req, res).delete();
+    })
+
 module.exports = router;

@@ -1,6 +1,6 @@
 ### hello
 
-POST http://localhost:47115/account/applicant/signup
+DELETE http://localhost:4414/account/applicant/delete
 Content-Type: application/json
 
 {
@@ -8,7 +8,7 @@ Content-Type: application/json
   "firstName": "sajied",
   "lastName": "hi",
   "email": "sajied@out.om",
-  "password": "qwertyuz"
+  "password": "qwertysza"
 }
 
 ###get

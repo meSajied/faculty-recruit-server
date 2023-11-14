@@ -14,7 +14,7 @@ router
       new AdminAccount(req, res).logout();
     })
 
-    .put("/change-pass", (req, res, next) => {
+    .put("/changepass", (req, res, next) => {
       new AdminAccount(req, res).changePassword();
     })
 
