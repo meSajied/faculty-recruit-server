@@ -1,7 +1,7 @@
 const AdminSchema = require("./AdminSchema");
 const ApplicantSchema = require("./ApplicantSchema");
-const ApplicationSchema = require("./ApplicationSchema");
 const JobSchema = require("./JobSchema");
+const ApplicationSchema = require("./ApplicationSchema");
 const ReviewerSchema = require("./ReviewerSchema");
 
 ApplicantSchema.hasMany(ApplicationSchema, {
@@ -14,6 +14,6 @@ JobSchema.hasMany(ApplicationSchema, {
 
 AdminSchema.sync();
 ApplicantSchema.sync();
-ApplicationSchema.sync();
 JobSchema.sync();
+ApplicationSchema.sync();
 ReviewerSchema.sync();
