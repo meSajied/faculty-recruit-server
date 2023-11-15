@@ -24,6 +24,16 @@ const JobSchema = sequelize
       position: {
         type: DataTypes.STRING,
         allowNull: false
+      },
+
+      advertised: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+
+      deadline: {
+        type: DataTypes.STRING,
+        allowNull: false
       }
     });
 
