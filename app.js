@@ -9,6 +9,8 @@ require('dotenv').config();
 require("./database");
 require("./schemas/UserAssociation");
 
+const homeRouter = require('./routes/HomeRouter');
+
 const adminAccountRouter =
     require('./routes/account-router/adminAccountRouter');
 const applicantAccountRouter =
@@ -27,6 +29,8 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/homepage', homeRouter);
 
 app.use('/account/admin', adminAccountRouter);
 app.use('/account/applicant', applicantAccountRouter);

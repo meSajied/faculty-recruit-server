@@ -13,10 +13,14 @@ Content-Type: application/json
 
 ###get
 
-GET http://localhost:47115/account/applicant/login
+GET http://localhost:4414/account/applicant/login
 Content-Type: application/json
 
 {
   "email": "sajied@out.om",
   "password": "qwertyuz"
 }
+
+### get pdf
+GET http://localhost:4414/homepage/pdfs/ce5e6c19-e362-4a0e-6d1c-069372cd67dc
+Content-Type: application/pdf
