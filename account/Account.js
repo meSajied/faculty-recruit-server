@@ -30,11 +30,11 @@ function Account(req, res, schema) {
     })
   }
 
-  this.createNewAccount = async function() {
-    await tryCreateNewAccount();
+  this.create = async function() {
+    await tryCreate();
   }
 
-  async function tryCreateNewAccount() {
+  async function tryCreate() {
     try {
       await schema.create(req.body);
       res.json("Account created");

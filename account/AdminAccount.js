@@ -8,7 +8,6 @@ function AdminAccount(req, res) {
 
   this.logout = async function() {
     await new Account(req, res, AdminSchema).logout();
-    next();
   }
 
   this.changePassword = async function() {

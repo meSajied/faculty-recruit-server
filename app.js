@@ -18,6 +18,10 @@ const applicantAccountRouter =
 const reviewerAccountRouter =
     require('./routes/account-router/reviewerAccountRouter');
 
+const adminRouter = require('./routes/user-router/AdminRouter');
+const applicantRouter = require('./routes/user-router/ApplicantRouter');
+const reviewerRouter = require('./routes/user-router/ReviewerRouter');
+
 const app = express();
 
 // view engine setup
@@ -35,6 +39,10 @@ app.use('/homepage', homeRouter);
 app.use('/account/admin', adminAccountRouter);
 app.use('/account/applicant', applicantAccountRouter);
 app.use('/account/reviewer', reviewerAccountRouter);
+
+app.use('/user/admin', adminRouter);
+app.use('/user/applicant', applicantRouter);
+app.use('/user/reviewer', reviewerRouter);
 
 require("./schemas/UserAssociation");
 const {log} = require("debug");

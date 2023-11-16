@@ -11,7 +11,7 @@ function ApplicantAccount(req, res) {
   }
 
   this.createNewAccount = async function() {
-    await new Account(req, res, ApplicantSchema).createNewAccount();
+    await new Account(req, res, ApplicantSchema).create();
   }
 
   this.logout = async function() {

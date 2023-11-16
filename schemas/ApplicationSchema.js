@@ -16,9 +16,18 @@ const ApplicationSchema = sequelize
         allowNull: false
       },
 
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false
+      grantedByRegister: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+        field: 'register_review'
+      },
+
+      grantedByDeputyRegister: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+        field: 'deputy_register_review'
       }
     });
 
