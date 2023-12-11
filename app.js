@@ -11,8 +11,8 @@ require("./schemas/UserAssociation");
 
 const homeRouter = require('./routes/HomeRouter');
 
-const adminAccountRouter =
-    require('./routes/account-router/adminAccountRouter');
+const AdministrationAccountRouter =
+    require('./routes/account-router/administrationAccountRouter');
 const applicantAccountRouter =
     require('./routes/account-router/applicantAccountRouter');
 const reviewerAccountRouter =
@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/homepage', homeRouter);
 
-app.use('/account/admin', adminAccountRouter);
+app.use('/account/administration', AdministrationAccountRouter);
 app.use('/account/applicant', applicantAccountRouter);
 app.use('/account/reviewer', reviewerAccountRouter);
 

@@ -1,5 +1,5 @@
 const ApplicantSchema = require("../schemas/ApplicantSchema");
-const {Account} = require("./Account");
+const {Account} = require("./Query");
 
 function ApplicantAccount(req, res) {
   this.verifyToken = async function() {

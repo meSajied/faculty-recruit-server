@@ -1,7 +1,33 @@
 const logger = require("../logger");
 
-function Account(req, res, schema) {
+function Query(req, res, schema) {
   this.verifyToken = async function() {
+  }
+
+  this.verifyAdministrationLogin = async function() {
+    try {
+      let user = await tryVerifyAdministrationLogin();
+      res.json(user);
+      logger.info("User verified");
+    }catch (err) {
+      logger.error(err);
+      res.json("Could not verify you");
+    }
+  }
+
+  async function tryVerifyAdministrationLogin() {
+    return await schema.findOne({
+      where: {
+        userName: req.body.userName,
+        password: req.body.password
+      }
+    }).then((response) => {
+      if(response == null) {
+        return ("No user found");
+      }else {
+        return response;
+      }
+    })
   }
 
   this.verifyLogin = async function() {
@@ -37,7 +63,7 @@ function Account(req, res, schema) {
   async function tryCreate() {
     try {
       await schema.create(req.body);
-      res.json("Account created");
+      res.json("Query created");
     }catch (err) {
       logger.error(err);
       res.json(err.errors[0].message);
@@ -80,12 +106,12 @@ function Account(req, res, schema) {
           password: req.body.password
         }
       });
-      res.json("Account deleted");
+      res.json("Query deleted");
     }catch (err) {
       logger.error(err);
-      res.json("Account could not be deleted");
+      res.json("Query could not be deleted");
     }
   }
 }
 
-module.exports = {Account};
+module.exports = {Query};

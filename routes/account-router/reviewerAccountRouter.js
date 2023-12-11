@@ -11,7 +11,7 @@ router
     })
 
     .get("/login", (req, res, next) => {
-      new ReviewerAccount(req, res).verifyLogin();
+      new ReviewerAccount(req, res).verifyAdministrationLogin();
     })
 
     .get("/logout", (req, res, next) => {

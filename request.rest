@@ -13,12 +13,12 @@ Content-Type: application/json
 
 ###get
 
-GET http://localhost:4414/account/applicant/login
+GET http://localhost:4414/account/administration/login
 Content-Type: application/json
 
 {
-  "email": "sajied@out.om",
-  "password": "qwertyuz"
+  "userName": "admin",
+  "password": "admin"
 }
 
 ### get pdf

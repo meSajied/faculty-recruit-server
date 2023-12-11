@@ -1,21 +1,21 @@
 var express = require('express');
 var router = express.Router();
 
-const {AdminAccount} =
-    require("../../account/AdminAccount");
+const {AdministrationAccount} =
+    require("../../account/AdministrationAccount");
 
 /* Routers for applicant */
 router
     .get("/login", (req, res, next) => {
-      new AdminAccount(req, res).verifyLogin();
+      new AdministrationAccount(req, res).verifyAdministrationLogin();
     })
 
     .get("/logout", (req, res, next) => {
-      new AdminAccount(req, res).logout();
+      new AdministrationAccount(req, res).logout();
     })
 
     .put("/changepass", (req, res, next) => {
-      new AdminAccount(req, res).changePassword();
+      new AdministrationAccount(req, res).changePassword();
     })
 
 module.exports = router;

@@ -2,8 +2,8 @@ const {DataTypes} = require('sequelize');
 
 const sequelize = require("../database");
 
-const AdminSchema = sequelize
-    .define("Admin", {
+const AdministrationSchema = sequelize
+    .define("Administration", {
       id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -11,22 +11,10 @@ const AdminSchema = sequelize
         primaryKey: true
       },
 
-      firstName: {
+      userName: {
         type: DataTypes.STRING,
         allowNull: false,
-        field: "first_name"
-      },
-
-      lastName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        field: "last_name"
-      },
-
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
+        field: "user_name"
       },
 
       password: {
@@ -35,4 +23,4 @@ const AdminSchema = sequelize
       }
     });
 
-module.exports = AdminSchema;
+module.exports = AdministrationSchema;

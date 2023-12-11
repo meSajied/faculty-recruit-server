@@ -1,4 +1,4 @@
-const {Account} = require("../account/Account");
+const {Account} = require("../account/Query");
 
 const ApplicantSchema = require('../schemas/ApplicantSchema');
 const JobSchema = require('../schemas/JobSchema');
