@@ -13,7 +13,7 @@ Content-Type: application/json
 
 ###get
 
-GET http://localhost:4414/account/administration/login
+POST http://localhost:4414/user/admin/createjobpost
 Content-Type: application/json
 
 {

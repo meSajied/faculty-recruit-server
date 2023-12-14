@@ -1,5 +1,5 @@
 const AdministrationSchema = require("../schemas/AdministrationSchema");
-const {Query} = require("./Query");
+const {Query} = require("../Query");
 
 function AdministrationAccount(req, res) {
   this.verifyAdministrationLogin = async function() {

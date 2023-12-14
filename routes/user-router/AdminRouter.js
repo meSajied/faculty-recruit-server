@@ -1,31 +1,18 @@
 var express = require('express');
 var router = express.Router();
 
-const {Admin} = require("../../user/Admin");
+const JobSchema = require('../../schemas/JobSchema');
+const {Query} = require("../../Query");
+const {upload} = require("../../multer_config");
 
 router
-    .post("/createapplicant", (req, res, next) => {
-      new Admin(req, res).createApplicantAccount();
+    .post("/createjobpost", upload.single('file'), async(req, res, next) => {
+      req.file.filename = req.body.id;
+      await new Query(req, res, JobSchema).applyForJob();
     })
 
-    .post("/deleteapplicant", (req, res, next) => {
-      new Admin(req, res).deleteApplicantAccount();
-    })
+    .post("/deletejobpost", async(req, res, next) => {
 
-    .post("/createreviewer", (req, res, next) => {
-      new Admin(req, res).createReviewerAccount();
-    })
-
-    .post("/deletereviewer", (req, res, next) => {
-      new Admin(req, res).deleteReviewerAccount();
-    })
-
-    .post("/createjobpost", (req, res, next) => {
-      new Admin(req, res).createJobOpening();
-    })
-
-    .post("/deletejobpost", (req, res, next) => {
-      new Admin(req, res).deleteJobOpening();
     })
 
 module.exports = router;

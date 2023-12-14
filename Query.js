@@ -1,4 +1,4 @@
-const logger = require("../logger");
+const logger = require("./logger");
 
 function Query(req, res, schema) {
   this.verifyToken = async function() {
@@ -18,8 +18,8 @@ function Query(req, res, schema) {
   async function tryVerifyAdministrationLogin() {
     return await schema.findOne({
       where: {
-        userName: req.body.userName,
-        password: req.body.password
+        userName: req.query.username,
+        password: req.query.password
       }
     }).then((response) => {
       if(response == null) {
@@ -110,6 +110,36 @@ function Query(req, res, schema) {
     }catch (err) {
       logger.error(err);
       res.json("Query could not be deleted");
+    }
+  }
+
+  this.createJobOpening = async function() {
+    try {
+      await schema.create(req.body.job);
+      res.json('Job opening created');
+    }catch(err) {
+      res.json('Could not create ob opening');
+      logger.error(err);
+    }
+  }
+
+  this.deleteJobOpening = async function() {
+    try {
+      await schema.destroy(req.body);
+      res.json('Job opening deleted');
+    }catch (err) {
+      res.json('Could not delete ob opening');
+      logger.error(err);
+    }
+  }
+
+  this.applyForJob = async function() {
+    try {
+      await schema.create(req.body);
+      res.json('Application created');
+    }catch (err) {
+      res.json('Could not create application');
+      logger.error(err);
     }
   }
 }

@@ -1,5 +1,5 @@
 const AdministrationSchema = require("../schemas/AdministrationSchema");
-const {Account} = require("./Query");
+const {Account} = require("../Query");
 
 async function ReviewerAccount(req, res, next) {
   this.verifyToken = async function() {
