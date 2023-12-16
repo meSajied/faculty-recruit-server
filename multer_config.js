@@ -9,8 +9,10 @@ const storage = multer.diskStorage({
     if(!fs.existsSync(saveDir)){
       fs.mkdirSync(saveDir, {recursive: true});
     }
-
     cb(null, saveDir);
+  },
+  filename: function(req, file, cb) {
+    cb(null, `${req.body.id}.pdf`)
   }
 });
 

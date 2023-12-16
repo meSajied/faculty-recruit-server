@@ -6,8 +6,8 @@ const {Query} = require("../../Query");
 const {upload} = require("../../multer_config");
 
 router
-    .post("/createjobpost", upload.single('file'), async(req, res, next) => {
-      req.file.filename = req.body.id;
+    .post("/createjobpost", upload.single('file'),
+        async(req, res, next) => {
       await new Query(req, res, JobSchema).applyForJob();
     })
 
