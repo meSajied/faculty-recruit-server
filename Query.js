@@ -47,12 +47,6 @@ function Query(req, res, schema) {
         email: req.body.email,
         password: req.body.password
       }
-    }).then((response) => {
-      if(response == null) {
-        return ("No user found");
-      }else {
-        return response;
-      }
     })
   }
 
@@ -105,8 +99,8 @@ function Query(req, res, schema) {
           id: req.body.id,
           password: req.body.password
         }
-      });
-      res.json("Query deleted");
+      }).then(res.json("Query deleted"));
+
     }catch (err) {
       logger.error(err);
       res.json("Query could not be deleted");
@@ -135,11 +129,37 @@ function Query(req, res, schema) {
 
   this.applyForJob = async function() {
     try {
-      await schema.create(req.body);
-      res.json('Application created');
+      await schema.create(req.body)
+          .then(res.json('Application created'));
     }catch (err) {
       res.json('Could not create application');
       logger.error(err);
+    }
+  }
+
+  this.changeApplicantPassword = async function() {
+    try {
+      await schema.update({
+        password: req.body.password
+      }, {
+        where: {
+          email: req.body.email
+        }
+      })
+    }catch(e) {
+      logger.error(e);
+    }
+  }
+
+  this.removeApplicant = async function() {
+    try {
+      await schema.destroy({
+        where: {
+          email: req.body.email
+        }
+      })
+    }catch(e) {
+      logger.error(e);
     }
   }
 }
