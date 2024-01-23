@@ -57,7 +57,7 @@ function Query(req, res, schema) {
   async function tryCreate() {
     try {
       await schema.create(req.body);
-      res.json("Query created");
+      res.json("Account created");
     }catch (err) {
       logger.error(err);
       res.json(err.errors[0].message);

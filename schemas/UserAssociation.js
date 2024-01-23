@@ -12,8 +12,9 @@ JobSchema.hasMany(ApplicationSchema, {
   foreignKey: "jobId"
 });
 
+
 AdminSchema.sync();
+ApplicationSchema.sync();
 ApplicantSchema.sync();
 JobSchema.sync();
-ApplicationSchema.sync();
 ReviewerSchema.sync();

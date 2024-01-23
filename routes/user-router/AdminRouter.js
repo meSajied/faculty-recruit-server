@@ -12,7 +12,7 @@ router
       await new Query(req, res, JobSchema).applyForJob();
     })
 
-    .post("/deletejobpost", async(req, res, next) => {
+    .post("/delete-job-post", async(req, res, next) => {
 
     })
 

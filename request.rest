@@ -1,23 +1,23 @@
 ### hello
 
-DELETE http://localhost:4414/account/applicant/delete
+POST http://localhost:4414/account/applicant/signup
 Content-Type: application/json
 
 {
   "id": "ce5e6c19-e362-4a0e-6d1c-069372cd67dc",
   "firstName": "sajied",
-  "lastName": "hi",
-  "email": "sajied@out.om",
-  "password": "qwertysza"
+  "lastName": "shah",
+  "email": "sajied@outlook.com",
+  "password": "sajiedshah"
 }
 
 ###get
 
-POST http://localhost:4414/user/admin/createjobpost
+GET http://localhost:4414/account/administration/login
 Content-Type: application/json
 
 {
-  "userName": "admin",
+  "username": "admin",
   "password": "admin"
 }
 
