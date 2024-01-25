@@ -18,9 +18,9 @@ Content-Type: application/json
 
 {
   "username": "admin",
-  "password": "admin"
+  "password": "12457"
 }
 
 ### get pdf
-GET http://localhost:4414/homepage/pdfs/ce5e6c19-e362-4a0e-6d1c-069372cd67dc
+GET http://localhost:4414/homepage/pdfs/35b67a94-c5b0-4486-a6e7-5fefb7e91bb4
 Content-Type: application/pdf

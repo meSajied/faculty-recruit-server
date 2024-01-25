@@ -12,7 +12,7 @@ router
     .get('/pdfs/:id', async (req, res, next) => {
       const pdfId = req.params.id;
       let pdf = '/home/me_sajied/Inspection/faculty-recruit-server/' +
-          `pdfs/${pdfId}.pdf`;
+          `job_circular/${pdfId}.pdf`;
 
       res.setHeader('Content-Type', 'application/pdf');
       res.sendFile(`${pdf}`);
