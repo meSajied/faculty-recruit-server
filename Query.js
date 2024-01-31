@@ -44,8 +44,8 @@ function Query(req, res, schema) {
   async function tryVerifyLogin() {
     return await schema.findOne({
       where: {
-        email: req.body.email,
-        password: req.body.password
+        email: req.query.email,
+        password: req.query.password
       }
     })
   }
@@ -56,8 +56,10 @@ function Query(req, res, schema) {
 
   async function tryCreate() {
     try {
-      await schema.create(req.body);
-      res.json("Account created");
+      await schema.create(req.body)
+      .then(() => {
+        res.json(req.body);
+      })
     }catch (err) {
       logger.error(err);
       res.json(err.errors[0].message);
@@ -109,7 +111,7 @@ function Query(req, res, schema) {
 
   this.createJobOpening = async function() {
     try {
-      await schema.create(req.body.job);
+      await schema.create(req.body);
       res.json('Job opening created');
     }catch(err) {
       res.json('Could not create ob opening');
