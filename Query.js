@@ -1,9 +1,6 @@
 const logger = require("./logger");
 
 function Query(req, res, schema) {
-  this.verifyToken = async function() {
-  }
-
   this.verifyAdministrationLogin = async function() {
     try {
       let user = await tryVerifyAdministrationLogin();
@@ -18,8 +15,8 @@ function Query(req, res, schema) {
   async function tryVerifyAdministrationLogin() {
     return await schema.findOne({
       where: {
-        userName: req.query.username,
-        password: req.query.password
+        userName: req.body.username,
+        password: req.body.password
       }
     }).then((response) => {
       if(response == null) {
@@ -44,17 +41,17 @@ function Query(req, res, schema) {
   async function tryVerifyLogin() {
     return await schema.findOne({
       where: {
-        email: req.query.email,
-        password: req.query.password
+        email: req.body.email,
+        password: req.body.password
       }
     })
   }
 
-  this.create = async function() {
-    await tryCreate();
+  this.createAccount = async function() {
+    await tryCreateAccount();
   }
 
-  async function tryCreate() {
+  async function tryCreateAccount() {
     try {
       await schema.create(req.body)
       .then(() => {

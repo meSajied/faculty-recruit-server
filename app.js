@@ -10,22 +10,16 @@ require('dotenv').config();
 require("./database");
 require("./schemas/UserAssociation");
 
-const homeRouter = require('./routes/HomeRouter');
+const JobRouter = require('./routes/JobRouter');
 
-const AdministrationAccountRouter =
-    require('./routes/account-router/administrationAccountRouter');
-const applicantAccountRouter =
-    require('./routes/account-router/applicantAccountRouter');
-const reviewerAccountRouter =
-    require('./routes/account-router/reviewerAccountRouter');
-
-const adminRouter = require('./routes/user-router/AdminRouter');
-const applicantRouter = require('./routes/user-router/ApplicantRouter');
-const reviewerRouter = require('./routes/user-router/ReviewerRouter');
+const AdminRouter =
+    require('./routes/AdminRouter');
+const ApplicantRouter =
+    require('./routes/ApplicantRouter');
+const ReviewerRouter =
+    require('./routes/ReviewerRouter');
 
 const app = express();
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,17 +32,12 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/homepage', homeRouter);
+app.use('/', JobRouter);
 
-app.use('/account/administration', AdministrationAccountRouter);
-app.use('/account/applicant', applicantAccountRouter);
-app.use('/account/reviewer', reviewerAccountRouter);
+app.use('/admin', AdminRouter);
+app.use('/applicant', ApplicantRouter);
+app.use('/reviewer', ReviewerRouter);
 
-app.use('/user/admin', adminRouter);
-app.use('/user/applicant', applicantRouter);
-app.use('/user/reviewer', reviewerRouter);
-
-require("./schemas/UserAssociation");
 const {log} = require("debug");
 
 // catch 404 and forward to error handler

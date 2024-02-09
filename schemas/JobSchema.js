@@ -16,6 +16,11 @@ const JobSchema = sequelize
         allowNull: false
       },
 
+      summary: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+
       department: {
         type: DataTypes.STRING,
         allowNull: false

@@ -5,20 +5,23 @@ const JobSchema = require('../schemas/JobSchema');
 const logger = require('../logger');
 
 router
-    .get('/data', async(req, res, next) => {
-      await getData(req, res);
+    .get('/job', async(req, res, next) => {
+      await getJobList(req, res);
     })
 
     .get('/pdfs/:id', async (req, res, next) => {
       const pdfId = req.params.id;
       let pdf = '/home/me_sajied/Inspection/faculty-recruit-server/' +
-          `job_circular/${pdfId}.pdf`;
+          `uploads/job_circular/${pdfId}.pdf`;
 
-      res.setHeader('Content-Type', 'application/pdf');
-      res.sendFile(`${pdf}`);
+      res.sendFile(`${pdf}`, {
+        headers: {
+          'Content-Type': 'application/pdf'
+        }
+      });
     });
 
-async function getData(req, res) {
+async function getJobList(req, res) {
   try {
     let jobList = await JobSchema.findAll().then((res) => {
       if(res == null) {
