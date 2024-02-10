@@ -1,4 +1,4 @@
-const AdminSchema = require("./AdministrationSchema");
+const AdminSchema = require("./AdminSchema");
 const ApplicantSchema = require("./ApplicantSchema");
 const JobSchema = require("./JobSchema");
 const ApplicationSchema = require("./ApplicationSchema");

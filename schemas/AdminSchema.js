@@ -2,7 +2,7 @@ const {DataTypes} = require('sequelize');
 
 const sequelize = require("../database");
 
-const AdministrationSchema = sequelize
+const AdminSchema = sequelize
     .define("Administration", {
       id: {
         type: DataTypes.UUID,
@@ -23,4 +23,4 @@ const AdministrationSchema = sequelize
       }
     });
 
-module.exports = AdministrationSchema;
+module.exports = AdminSchema;

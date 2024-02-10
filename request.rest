@@ -1,6 +1,6 @@
 ### hello
 
-POST http://localhost:4414/account/applicant/signup
+POST http://localhost:4414/applicant/signup
 Content-Type: application/json
 
 {
@@ -13,12 +13,12 @@ Content-Type: application/json
 
 ###get
 
-GET http://localhost:4414/account/applicant/login
+POST http://localhost:4414/admin/login
 Content-Type: application/json
 
 {
-  "email": "sajied@outlook.com",
-  "password": "Hello Sajied"
+  "username": "admin",
+  "password": "admin"
 }
 
 ### get pdf

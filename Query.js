@@ -1,9 +1,9 @@
 const logger = require("./logger");
 
 function Query(req, res, schema) {
-  this.verifyAdministrationLogin = async function() {
+  this.verifyAdminLogin = async function() {
     try {
-      let user = await tryVerifyAdministrationLogin();
+      let user = await tryVerifyAdminLogin();
       res.json(user);
       logger.info("User verified");
     }catch (err) {
@@ -12,7 +12,7 @@ function Query(req, res, schema) {
     }
   }
 
-  async function tryVerifyAdministrationLogin() {
+  async function tryVerifyAdminLogin() {
     return await schema.findOne({
       where: {
         userName: req.body.username,
@@ -25,6 +25,23 @@ function Query(req, res, schema) {
         return response;
       }
     })
+  }
+
+  this.changeAdminPassword = async function() {
+    try {
+      await schema.update({
+        password: req.body.newPassword
+      }, {
+        where: {
+          userName: req.body.userName,
+          password: req.body.oldPassword
+        }
+      }).then(() => {
+        res.json({msg: "OK"})
+      })
+    }catch(e) {
+      logger.error(e);
+    }
   }
 
   this.verifyLogin = async function() {
@@ -77,13 +94,13 @@ function Query(req, res, schema) {
         password: req.body.password
       }, {
         where: {
-          id: req.body.id
+          email: req.body.email
         }
-      });
-      res.json("Password changed");
-    }catch (err) {
-      logger.error(err);
-      res.json("Could not change password");
+      }).then(() => {
+        res.json({msg: "OK"})
+      })
+    }catch(e) {
+      logger.error(e);
     }
   }
 
@@ -108,20 +125,26 @@ function Query(req, res, schema) {
 
   this.createJobOpening = async function() {
     try {
-      await schema.create(req.body);
-      res.json('Job opening created');
+      await schema.create(req.body).then(() => {
+        res.json({msg: "OK"});
+      })
     }catch(err) {
-      res.json('Could not create ob opening');
       logger.error(err);
     }
   }
 
   this.deleteJobOpening = async function() {
     try {
-      await schema.destroy(req.body);
-      res.json('Job opening deleted');
-    }catch (err) {
-      res.json('Could not delete ob opening');
+      await schema.create(req.body, {
+        where: {
+          title: req.body.title,
+          department: req.body.department,
+          position: req.body.position
+        }
+      }).then(() => {
+        res.json({msg: "OK"});
+      })
+    }catch(err) {
       logger.error(err);
     }
   }
@@ -133,32 +156,6 @@ function Query(req, res, schema) {
     }catch (err) {
       res.json('Could not create application');
       logger.error(err);
-    }
-  }
-
-  this.changeApplicantPassword = async function() {
-    try {
-      await schema.update({
-        password: req.body.password
-      }, {
-        where: {
-          email: req.body.email
-        }
-      })
-    }catch(e) {
-      logger.error(e);
-    }
-  }
-
-  this.removeApplicant = async function() {
-    try {
-      await schema.destroy({
-        where: {
-          email: req.body.email
-        }
-      })
-    }catch(e) {
-      logger.error(e);
     }
   }
 }

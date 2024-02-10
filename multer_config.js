@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    let saveDir = './job_circular';
+    let saveDir = './uploads/job_circular';
 
     if(!fs.existsSync(saveDir)){
       fs.mkdirSync(saveDir, {recursive: true});
