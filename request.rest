@@ -13,7 +13,7 @@ Content-Type: application/json
 
 ###get
 
-POST http://localhost:4414/admin/login
+POST https://mesajied-faculty-recruit-server.onrender.com/admin/login
 Content-Type: application/json
 
 {
@@ -22,5 +22,5 @@ Content-Type: application/json
 }
 
 ### get pdf
-GET http://localhost:4414/job
+GET https://mesajied-faculty-recruit-server.onrender.com/
 Content-Type: application/json
