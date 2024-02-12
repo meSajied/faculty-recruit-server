@@ -15,14 +15,8 @@ function Query(req, res, schema) {
   async function tryVerifyAdminLogin() {
     return await schema.findOne({
       where: {
-        userName: req.body.username,
+        userName: req.body.userName,
         password: req.body.password
-      }
-    }).then((response) => {
-      if(response == null) {
-        return ("No user found");
-      }else {
-        return response;
       }
     })
   }

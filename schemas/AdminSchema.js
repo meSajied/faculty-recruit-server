@@ -3,7 +3,7 @@ const {DataTypes} = require('sequelize');
 const sequelize = require("../database");
 
 const AdminSchema = sequelize
-    .define("Administration", {
+    .define("Admin", {
       id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,

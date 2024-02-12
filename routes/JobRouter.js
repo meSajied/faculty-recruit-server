@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
+const path = require("path");
 
 const JobSchema = require('../schemas/JobSchema');
 const logger = require('../logger');
+
+const pdfpath = path.resolve(__dirname + "/../uploads/job_circular")
 
 router
     .get('/job', async(req, res, next) => {
@@ -11,8 +14,7 @@ router
 
     .get('/pdfs/:id', async (req, res, next) => {
       const pdfId = req.params.id;
-      let pdf = '/home/me_sajied/Inspection/faculty-recruit-server/' +
-          `uploads/job_circular/${pdfId}.pdf`;
+      let pdf = pdfpath + `/${pdfId}.pdf`;
 
       res.sendFile(`${pdf}`, {
         headers: {
@@ -23,13 +25,7 @@ router
 
 async function getJobList(req, res) {
   try {
-    let jobList = await JobSchema.findAll().then((res) => {
-      if(res == null) {
-        return('No openings now');
-      }else {
-        return res;
-      }
-    });
+    let jobList = await JobSchema.findAll();
     res.json(jobList);
   }catch(err) {
     logger.error(err);
