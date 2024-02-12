@@ -1,6 +1,6 @@
 {
   "version": 2,
   "rewrites": [
-    { "src": "/(.*)", "dest": "./bin/www" }
+    { "src": "/(.*)", "dest": "./app.js" }
   ]
 }
