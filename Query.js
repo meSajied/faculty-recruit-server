@@ -78,17 +78,26 @@ function Query(req, res, schema) {
 
   }
 
-  this.changePassword = async function() {
-    await tryChangePassword();
+  this.fetchDetails = async function() {
+    logger.info(req.query.id)
+    try {
+      await schema.findOne({
+        where: {
+          id: req.query.id
+        }
+      }).then((user) => {
+        res.json(user);
+      })
+    }catch(e) {
+      logger.error(e);
+    }
   }
 
-  async function tryChangePassword() {
+  this.updateProfile = async function() {
     try {
-      await schema.update({
-        password: req.body.password
-      }, {
+      schema.update({
         where: {
-          email: req.body.email
+          id: req.body.id
         }
       }).then(() => {
         res.json({msg: "OK"})
@@ -98,7 +107,28 @@ function Query(req, res, schema) {
     }
   }
 
-  this.delete = async function() {
+  this.changePassword = async function() {
+    await tryChangePassword();
+  }
+
+  async function tryChangePassword() {
+    try {
+      await schema.update({
+        password: req.body.newPassword
+      }, {
+        where: {
+          id: req.body.id,
+          password: req.body.oldPassword
+        }
+      }).then(() => {
+        res.json({msg: "OK"})
+      })
+    }catch(e) {
+      logger.error(e);
+    }
+  }
+
+  this.deleteAccount = async function() {
     await tryDelete();
   }
 
@@ -109,11 +139,12 @@ function Query(req, res, schema) {
           id: req.body.id,
           password: req.body.password
         }
-      }).then(res.json("Query deleted"));
+      }).then(() => {
+        res.json({msg: "OK"})
+      });
 
     }catch (err) {
       logger.error(err);
-      res.json("Query could not be deleted");
     }
   }
 

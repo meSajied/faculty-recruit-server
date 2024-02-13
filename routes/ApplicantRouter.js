@@ -14,6 +14,14 @@ router
       await new Query(req, res, ApplicantSchema).createAccount();
     })
 
+    .get("/fetch-details", async(req, res, next) => {
+      await new Query(req, res, ApplicantSchema).fetchDetails();
+    })
+
+    .post("/update-profile", async(req, res, next) => {
+      await new Query(req, res, ApplicantSchema).updateProfile();
+    })
+
     .post("/logout", async(req, res, next) => {
       await new Query(req, res, ApplicantSchema).logout();
     })
@@ -22,8 +30,8 @@ router
       await new Query(req, res, ApplicantSchema).changePassword();
     })
 
-    .post("/delete", async(req, res, next) => {
-      await new Query(req, res, ApplicantSchema).delete();
+    .post("/delete-account", async(req, res, next) => {
+      await new Query(req, res, ApplicantSchema).deleteAccount();
     })
 
 module.exports = router;
