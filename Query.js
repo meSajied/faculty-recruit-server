@@ -79,7 +79,6 @@ function Query(req, res, schema) {
   }
 
   this.fetchDetails = async function() {
-    logger.info(req.query.id)
     try {
       await schema.findOne({
         where: {
@@ -96,6 +95,22 @@ function Query(req, res, schema) {
   this.updateProfile = async function() {
     try {
       schema.update({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        fathersName: req.body.fathersName,
+        mothersName: req.body.mothersName,
+        spouseName: req.body.spouseName,
+        birthDate: req.body.birthDate,
+        maritalStatus: req.body.maritalStatus,
+        nationalIdNumber: req.body.nationalIdNumber,
+        currentAddress: req.body.currentAddress,
+        mobile: req.body.mobile,
+        email: req.body.email,
+        permanentAddress: req.body.permanentAddress,
+        country: req.body.country,
+        nationality: req.body.nationality,
+        religion: req.body.religion,
+      },{
         where: {
           id: req.body.id
         }
