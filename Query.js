@@ -55,6 +55,10 @@ function Query(req, res, schema) {
         email: req.body.email,
         password: req.body.password
       }
+    }).then((user) => {
+      return ({id: user.id, 
+        email: user.email,
+        firstName: user.firstName})
     })
   }
 
@@ -192,9 +196,10 @@ function Query(req, res, schema) {
   this.applyForJob = async function() {
     try {
       await schema.create(req.body)
-          .then(res.json('Application created'));
+          .then(() => {
+            res.json({msg: "OK"})
+          });
     }catch (err) {
-      res.json('Could not create application');
       logger.error(err);
     }
   }

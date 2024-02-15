@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const ApplicantSchema = require("../schemas/ApplicantSchema");
-const {Query} =
-    require("../Query");
+const ApplicationSchema = require("../schemas/ApplicationSchema");
+const {Query} = require("../Query");
+const { uploadMultiple } = require('../multer_config');
 
 router
     .post("/login", async(req, res, next) => {
@@ -20,6 +21,15 @@ router
 
     .post("/update-profile", async(req, res, next) => {
       await new Query(req, res, ApplicantSchema).updateProfile();
+    })
+
+    .post("/apply-for-job", uploadMultiple.fields([
+      {name: "photo", maxCount: 1},
+      {name: "transcript", maxCount: 1},
+      {name: "nationalId", maxCount: 1},
+      {name: "mcir", maxCount: 1},
+    ]), async(req, res, next) => {
+      await new Query(req, res, ApplicationSchema).applyForJob();
     })
 
     .post("/logout", async(req, res, next) => {
