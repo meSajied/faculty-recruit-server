@@ -16,6 +16,35 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({storage: storage})
+const storageMultiple = multer.diskStorage({
+  destination: function(req, file, cb) {
+    let saveDir = `./uploads/applications/${req.body.id}`;
 
-module.exports = {upload}
+    if(!fs.existsSync(saveDir)){
+      fs.mkdirSync(saveDir, {recursive: true});
+    }
+    cb(null, saveDir);
+  },
+  filename: function(req, file, cb) {
+    if(file.fieldname === "photo") {
+      cb(null, "photo.jpg");
+    }
+
+    if(file.fieldname === "transcript") {
+      cb(null, "transcript.pdf");
+    }
+    
+    if(file.fieldname === "mcir") {
+      cb(null, "mcir.pdf");
+    }
+
+    if(file.fieldname === "nationalId") {
+      cb(null, "nationalId.pdf");
+    }
+  }
+});
+
+const upload = multer({storage: storage});
+const uploadMultiple = multer({storage: storageMultiple});
+
+module.exports = {upload, uploadMultiple}

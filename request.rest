@@ -1,14 +1,12 @@
 ### hello
 
-POST http://localhost:4414/applicant/signup
-Content-Type: application/json
+POST http://localhost:4414/applicant/apply-for-job
+Content-Type: multipart/form-data
 
 {
-  "id": "ce5e6c19-e362-4a0e-6d1c-069372cd67dc",
-  "firstName": "sajied",
-  "lastName": "shah",
-  "email": "sajied@outlook.com",
-  "password": "sajiedshah"
+  "id:": "ce5e6c19-e362-4a0e-6d1c-069372cd67dc"
+  "jobId": "414b041e-1219-4ea0-b7be-c48351c9e364",
+  "applicanId": "ce5e6c19-e362-4a0e-6d1c-069372cd67dc"
 }
 
 ###get
