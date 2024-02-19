@@ -4,12 +4,11 @@ const JobSchema = require("./JobSchema");
 const ApplicationSchema = require("./ApplicationSchema");
 const ReviewerSchema = require("./ReviewerSchema");
 
-ApplicantSchema.hasMany(ApplicationSchema, {
-  foreignKey: "applicantId"
-});
-
-JobSchema.hasMany(ApplicationSchema, {
+ApplicationSchema.belongsTo(JobSchema, {
   foreignKey: "jobId"
+});
+ApplicationSchema.belongsTo(ApplicantSchema, {
+  foreignKey: "applicantId"
 });
 
 

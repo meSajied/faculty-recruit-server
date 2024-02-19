@@ -1,4 +1,6 @@
 const logger = require("./logger");
+const ApplicantSchema = require("./schemas/ApplicantSchema");
+const JobSchema = require("./schemas/JobSchema");
 
 function Query(req, res, schema) {
   this.verifyAdminLogin = async function() {
@@ -56,9 +58,7 @@ function Query(req, res, schema) {
         password: req.body.password
       }
     }).then((user) => {
-      return ({id: user.id, 
-        email: user.email,
-        firstName: user.firstName})
+      return (user)
     })
   }
 
@@ -164,6 +164,28 @@ function Query(req, res, schema) {
 
     }catch (err) {
       logger.error(err);
+    }
+  }
+
+  this.applications = async function() {
+    try {
+      await schema.findAll({
+        where: {
+          applicantId: req.body.id
+        },
+        include: [
+      {
+        model: ApplicantSchema
+      },
+      {
+        model: JobSchema
+      }
+    ]
+      }).then((applications) => {
+        res.json(applications);
+      })
+    }catch(e) {
+      logger.error(e);
     }
   }
 

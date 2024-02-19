@@ -5,6 +5,7 @@ const ApplicantSchema = require("../schemas/ApplicantSchema");
 const ApplicationSchema = require("../schemas/ApplicationSchema");
 const {Query} = require("../Query");
 const { uploadMultiple } = require('../multer_config');
+const logger = require('../logger');
 
 router
     .post("/login", async(req, res, next) => {
@@ -34,6 +35,10 @@ router
 
     .post("/logout", async(req, res, next) => {
       await new Query(req, res, ApplicantSchema).logout();
+    })
+
+    .post("/applications", async(req, res, next) => {
+      await new Query(req, res, ApplicationSchema).applications();
     })
 
     .post("/change-password", async(req, res, next) => {

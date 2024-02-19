@@ -13,7 +13,7 @@ const ApplicationSchema = sequelize
 
       status: {
         type: DataTypes.STRING,
-        defaultValue: false,
+        defaultValue: "PENDING",
         allowNull: false
       },
 

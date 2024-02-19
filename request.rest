@@ -11,14 +11,18 @@ Content-Type: multipart/form-data
 
 ###get
 
-POST https://mesajied-faculty-recruit-server.onrender.com/admin/login
+POST https://0z548vh3-4414.euw.devtunnels.ms/admin/login
 Content-Type: application/json
 
 {
-  "username": "admin",
+  "userName": "admin",
   "password": "admin"
 }
 
 ### get pdf
-GET https://mesajied-faculty-recruit-server.onrender.com/
+POST  http://localhost:4414/applicant/applications
 Content-Type: application/json
+
+{
+  "id": "ce5e6c19-e362-4a0e-6d1c-069372cd67dc"
+}
