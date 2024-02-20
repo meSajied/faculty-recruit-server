@@ -201,11 +201,9 @@ function Query(req, res, schema) {
 
   this.deleteJobOpening = async function() {
     try {
-      await schema.create(req.body, {
+      await schema.destroy({
         where: {
-          title: req.body.title,
-          department: req.body.department,
-          position: req.body.position
+          id: req.body.id
         }
       }).then(() => {
         res.json({msg: "OK"});
