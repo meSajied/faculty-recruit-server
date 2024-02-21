@@ -16,7 +16,7 @@ router
       const pdfId = req.params.id;
       let pdf = pdfpath + `/${pdfId}.pdf`;
 
-      res.sendFile(`${pdf}`, {
+      res.sendFile(pdf, {
         headers: {
           'Content-Type': 'application/pdf'
         }

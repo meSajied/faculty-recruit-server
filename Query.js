@@ -167,7 +167,7 @@ function Query(req, res, schema) {
     }
   }
 
-  this.applications = async function() {
+  this.applicantApplications = async function() {
     try {
       await schema.findAll({
         where: {
@@ -221,6 +221,111 @@ function Query(req, res, schema) {
           });
     }catch (err) {
       logger.error(err);
+    }
+  }
+
+  this.reviewerLogin = async function() {
+    await schema.findOne({
+        where: {
+          position: req.body.position
+        }
+    }).then((user) => {
+      res.json(user);
+    })
+    .catch((e) => {
+      logger.error(e);
+    })
+  }
+
+  this.changeReviewerPassword = async function() {
+    await schema.update({
+      password: req.body.newPassword,
+    }, {
+      where: {
+        id: req.body.id,
+        password: req.body.oldPassword
+      }
+    }).then(() => {
+      res.json({msg: "OK"})
+    })
+  }
+
+  this.applications = async function() {
+    if(req.query.position === "register") {
+      await schema.findAll({
+        where: {
+          isRejected: false
+        },
+        include: [
+      {
+        model: ApplicantSchema
+      },
+      {
+        model: JobSchema
+      }
+    ]
+      }).then((applications) => {
+        res.json(applications)
+      }).catch((e) => {
+        logger.error(e);
+      })
+    }
+    if(req.query.position === "deputy_register") {
+      await schema.findAll({
+        where: {
+          grantedByRegister: true,
+          grantedByDeputyRegister: false,
+          isRejected: false
+        },
+        include: [
+      {
+        model: ApplicantSchema
+      },
+      {
+        model: JobSchema
+      }
+    ]
+      }).then((applications) => {
+        res.json(applications)
+      }).catch((e) => {
+        logger.error(e);
+      })
+    }
+  }
+
+  this.updateApplication = async function() {
+    if(req.body.position === "register") {
+      await schema.update({
+        grantedByRegister: req.body.approve,
+        isRejected: req.body.isRejected
+      },{
+        where: {
+          id: req.body.id,
+          grantedByRegister: false,
+          isRejected: false
+        }
+      }).then(() => {
+        res.json({msg: "OK"})
+      }).catch((e) => {
+        logger.error(e);
+      })
+    }
+    if(req.body.position === "deputy_register") {
+      await schema.update({
+        grantedByDeputyRegister: req.body.approve,
+        isRejected: req.body.isRejected
+      },{
+        where: {
+          id: req.body.id,
+          grantedByRegister: true,
+          isRejected: false,
+          grantedByDeputyRegister: false
+        }
+      }).then(() => {
+        res.json({msg: "OK"})
+      }).catch((e) => {
+        logger.error(e);
+      })
     }
   }
 }

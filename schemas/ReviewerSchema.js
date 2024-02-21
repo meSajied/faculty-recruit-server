@@ -23,12 +23,6 @@ const ReviewerSchema = sequelize
         field: "last_name"
       },
 
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-      },
-
       position: {
         type: DataTypes.STRING,
         allowNull: false,

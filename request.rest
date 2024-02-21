@@ -20,9 +20,16 @@ Content-Type: application/json
 }
 
 ### get pdf
-POST  http://localhost:4414/applicant/applications
+GET  http://localhost:4414/application/7f45886d-f05c-4bbb-a385-529ffd1319cd/photo.jpg
+Content-Type: application/pdf
+
+### data
+POST http://localhost:4414/reviewer/applications
 Content-Type: application/json
 
 {
-  "id": "ce5e6c19-e362-4a0e-6d1c-069372cd67dc"
+  "position": "register",
+  "id": "7f45886d-f05c-4bbb-a385-529ffd1319cd",
+  "approve": true,
+  "isRejected": false
 }

@@ -2,34 +2,39 @@ const {DataTypes} = require('sequelize');
 
 const sequelize = require("../database");
 
-const ApplicationSchema = sequelize
-    .define("Application", {
-      id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        allowNull: false,
-        primaryKey: true
-      },
+const ApplicationSchema = sequelize.define("Application", {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    allowNull: false,
+    primaryKey: true
+  },
 
-      status: {
-        type: DataTypes.STRING,
-        defaultValue: "PENDING",
-        allowNull: false
-      },
+  isRejected: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
 
-      grantedByRegister: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
-        field: 'register_review'
-      },
+  status: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: sequelize.literal('CASE WHEN "isRejected" = true THEN \'rejected\' ELSE \'processing\' END')
+  },
 
-      grantedByDeputyRegister: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
-        field: 'deputy_register_review'
-      }
-    });
+  grantedByRegister: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+    field: 'register_review'
+  },
+
+  grantedByDeputyRegister: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+    field: 'deputy_register_review'
+  }
+});
 
 module.exports = ApplicationSchema;

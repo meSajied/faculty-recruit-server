@@ -38,7 +38,7 @@ router
     })
 
     .post("/applications", async(req, res, next) => {
-      await new Query(req, res, ApplicationSchema).applications();
+      await new Query(req, res, ApplicationSchema).applicantApplications();
     })
 
     .post("/change-password", async(req, res, next) => {

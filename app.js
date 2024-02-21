@@ -18,6 +18,7 @@ const ApplicantRouter =
     require('./routes/ApplicantRouter');
 const ReviewerRouter =
     require('./routes/ReviewerRouter');
+const ApplicationRouter = require('./routes/ApplicationRouter');
 
 const app = express();
 app.use(cors())
@@ -41,6 +42,7 @@ app.use('/', JobRouter);
 app.use('/admin', AdminRouter);
 app.use('/applicant', ApplicantRouter);
 app.use('/reviewer', ReviewerRouter);
+app.use('/application', ApplicationRouter);
 
 const {log} = require("debug");
 
