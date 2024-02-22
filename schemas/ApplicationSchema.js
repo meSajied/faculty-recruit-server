@@ -2,39 +2,63 @@ const {DataTypes} = require('sequelize');
 
 const sequelize = require("../database");
 
-const ApplicationSchema = sequelize.define("Application", {
+const ApplicationSchema = sequelize.define('Application', {
   id: {
     type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
     allowNull: false,
-    primaryKey: true
+    primaryKey: true,
   },
-
   isRejected: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
-    defaultValue: false
+    defaultValue: false,
   },
-
   status: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(255),
     allowNull: false,
-    defaultValue: sequelize.literal('CASE WHEN "isRejected" = true THEN \'rejected\' ELSE \'processing\' END')
   },
-
-  grantedByRegister: {
+  register_review: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: false,
-    field: 'register_review'
   },
-
-  grantedByDeputyRegister: {
+  deputy_register_review: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: false,
-    field: 'deputy_register_review'
-  }
+  },
+  createdAt: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+  updatedAt: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+  jobId: {
+    type: DataTypes.UUID,
+    references: {
+      model: 'Jobs',
+      key: 'id',
+    },
+    onDelete: 'SET NULL',
+    onUpdate: 'CASCADE',
+  },
+  applicantId: {
+    type: DataTypes.UUID,
+    references: {
+      model: 'Applicants',
+      key: 'id',
+    },
+    onDelete: 'SET NULL',
+    onUpdate: 'CASCADE',
+  },
+}, {
+  hooks: {
+    beforeSave: (application) => {
+      application.status = application.isRejected ? 'rejected' : 'processing';
+    },
+  },
 });
 
 module.exports = ApplicationSchema;
